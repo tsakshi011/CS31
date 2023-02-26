@@ -1,0 +1,46 @@
+1)One obstacle I faced was with counting silvers in the probe word’s as each solution I wrote did not account for all the test cases. I realized that instead of accounting for all test cases implementing them separately, I could remove the silver that has already been counted, by replacing the element in the array with a non-letter. I also then had to copy over original arrays to duplicate arrays so that the original array would not be changed(arrays pass by reference). Another obstacle I faced was setting up the project initially when understanding what each component of the given functions was responsible for.
+
+
+2)Pseudocode:
+Function isInDictionary- checks if the word is in the dictionary - parameters dictionary(contains valid words), word:
+Repeatedly check each element of the dictionary and compare to the word 
+If find any element equal to the word → return true
+If no such word found in the dictionary → return false
+
+Function validGuess - checks that the word is of correct length and all lowercase letters - parameter is word:
+If the length of the word is greater than 6 or less than 4 → return false
+Loops over to check if each element of word is lowercase → if any is not then returns false
+Returns true finally if the false conditions are not met
+
+Function numGolds - checks the number of golds in two words - parameters target word, and user’s guess:
+Checks whether target word or user’s guess has the smaller length so to avoid out of bounds errors when accessing indices in the loop
+Loops over smallest length of the two
+Checks if corresponding indices of guess and targetWord are equal - if equal adds 1 to number of golds
+Returns number of golds
+
+Function numSilvers - checks the number of silvers in two words - parameters target word and user’s guess:
+Copies both target word and guess into duplicate arrays
+Nested for loop to go over each element of duplicate target word and duplicate guess
+Checking if they are equal 
+Increments variable tracking number of silvers
+Replaces element at each position in the duplicate arrays with hashtag to show that element cannot be counted as another silver → removes issue of duplicate silvers being counted
+ Returns final silver count - subtracting the number of golds → as silver counted even when each position was equal in above nested for loop
+Function playOne Round - array holding words, number of words in the array, wordNum passed in:
+Settings target word to the element at wordNum in array words
+Infinite for loop
+Getting guess from user
+Calling validGuess - to check validity of user’s guess
+Calling isInDictionary - to check validity of user’s guess
+Checking if user’s guess equal to target word → breaks from infinite loop
+Else if not equal - calls numGolds & numSilvers and outputs results
+Increments user’s tries
+Return number of tries user took to guess the targetWord
+
+Main Function:
+Loads up the array holding all possible words
+Random integer generated bounds of 0 to number of actual words in the array
+Gets how many rounds the user wants to play
+For loop over the number of rounds:
+Calls PlayOneRound passing in the word array, number of words in the array, random number
+Prints out the max tries, minimum tries, average number of tries for each round
+
